@@ -1,3 +1,4 @@
+# Exemplo de uso: sh ./compile.sh codigo
 #!/bin/bash
 clear
 
