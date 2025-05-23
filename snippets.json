@@ -1,6 +1,5 @@
-// ao digitar "cpp" no
-
 {
+	// ao digitar "cpp" em um arquivo .cpp o seu template de código será inserido.
 	"template C++": {
 		"prefix": "cpp",
 		"body":[
