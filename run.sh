@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+# sh ./compile.sh A (cpp, py, java) || rmv (remove)
+# caso queira escrever menos, ex: run A (cpp ou rmv)
+# execute isso no seu terminal:
+
+# mkdir -p ~/.local/bin
+# mv run ~/.local/bin/
+# chmod +x ~/.local/bin/run
+# export PATH="$HOME/.local/bin:$PATH"
+# source ~/.bashrc
+# se funcionou, agora só escreva: run A (criar, rodar ou remover)
 
 clear
 clear
