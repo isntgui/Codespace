@@ -10,6 +10,13 @@
 # source ~/.bashrc
 # se funcionou, agora só escreva: run A (criar, rodar ou remover)
 
+# update
+# nano ~/run
+# mv ~/run ~/.local/bin/run
+# chmod +x ~/.local/bin/run
+# echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+# source ~/.bashrc
+
 clear
 clear
 
