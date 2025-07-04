@@ -1,70 +1,116 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+clear
 clear
 
 if [ -z "$1" ]; then
-  echo "Erro: você precisa passar o nome do arquivo (sem a extensão)."
+  echo "Erro: você precisa passar o nome do arquivo (sem extensão)."
   exit 1
 fi
 
-# Cria arquivo .cpp se não existir
-if [ ! -f "$1.cpp" ]; then
-  cat > "$1.cpp" <<EOL
+filename="$1"
+
+if [ "$2" = "rmv" ]; then
+  rm -f "$filename".* "$filename"
+  echo "Arquivos de $filename removidos."
+  exit 0
+fi
+
+if [ -z "$2" ]; then
+  echo "Erro: você precisa especificar a linguagem (cpp, py ou java)."
+  exit 1
+fi
+
+lang="$2"
+
+[ -f "$filename.in" ] || touch "$filename.in"
+
+case "$lang" in
+  cpp)
+    if [ ! -f "$filename.cpp" ]; then
+      cat > "$filename.cpp" <<EOL
 #include <bits/stdc++.h>
 using namespace std;
 
+#ifdef LOCAL
+    #include "debugging.h"
+#endif
+
 #define int int64_t
-#define dbg(v) cerr << "Line(" << __LINE__ << ") -> " << #v << " = " << (v) << "\n"
 
 int32_t main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	
-	;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    ;
 }
 EOL
-else
-  echo "Arquivo $1.cpp já existe. Não será alterado."
-fi
+    fi
+    g++ -DLOCAL -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$filename.cpp" -o "$filename"
+    ;;
+  py)
+    if [ ! -f "$filename.py" ]; then
+      cat > "$filename.py" <<EOL
+def dbg(v, name=""):
+    print(f"DEBUG: {name} = {v}", file=sys.stderr)
 
-# Cria arquivo de entrada vazio se não existir
-if [ ! -f "$1.in" ]; then
-  touch "$1.in"
-else
-  echo "Arquivo $1.in já existe. Não será alterado."
-fi
+import sys
+
+def main():
+    data = sys.stdin.read()
+    print(data)
+
+if __name__ == "__main__":
+    main()
+EOL
+    fi
+    ;;
+  java)
+    class_name="$(echo "$filename" | sed -E 's/[^a-zA-Z0-9]/_/g')"
+    if [ ! -f "$filename.java" ]; then
+      cat > "$filename.java" <<EOL
+import java.util.*;
+public class $class_name {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+    }
+}
+EOL
+    fi
+    javac "$filename.java"
+    ;;
+  *)
+    echo "Erro: linguagem inválida. Use 'cpp', 'py' ou 'java'."
+    exit 1
+    ;;
+esac
 
 clear
 
-# Compila o código, incluindo diretórios extras se precisar
-g++ -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$1.cpp" -o "$1"
-
-# Mede o tempo de execução do programa
 start=$(date +%s%N)
-./"$1" < "$1.in" > "$1.out"
+
+case "$lang" in
+  cpp)
+    ./"$filename" < "$filename.in" > "$filename.out"
+    ;;
+  py)
+    python3 "$filename.py" < "$filename.in" > "$filename.out"
+    ;;
+  java)
+    java "$class_name" < "$filename.in" > "$filename.out"
+    ;;
+esac
+
 end=$(date +%s%N)
 
-# Exibe saída do programa
-cat "$1.out"
+cat "$filename.out"
 
-# Calcula duração em milissegundos
 duration=$((end - start))
 duration_ms=$((duration / 1000000))
-
-# Calcula segundos e milissegundos com padding
 seconds=$((duration_ms / 1000))
 milliseconds=$((duration_ms % 1000))
 
-# Padding para segundos com 2 dígitos (ex: 05)
-if [ $seconds -lt 10 ]; then
-  seconds_padded="0$seconds"
-else
-  seconds_padded=$seconds
-fi
-
-# Padding para milissegundos com 3 dígitos (ex: 023)
+seconds_padded=$(printf "%02d" $seconds)
 milliseconds_padded=$(printf "%03d" $milliseconds)
 
 echo "Tempo de execução: ${seconds_padded}.${milliseconds_padded} s"
-
-# Opcional: Remover arquivos gerados (descomentar se desejar)
-# rm "$1.cpp" "$1" "$1.in" "$1.out"
