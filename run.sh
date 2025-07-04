@@ -102,8 +102,6 @@ EOL
     ;;
 esac
 
-clear
-
 start=$(date +%s%N)
 
 case "$lang" in
