@@ -68,17 +68,12 @@ EOL
   py)
     if [ ! -f "$filename.py" ]; then
       cat > "$filename.py" <<EOL
-def dbg(v, name=""):
-    print(f"DEBUG: {name} = {v}", file=sys.stderr)
-
-import sys
-
-def main():
-    data = sys.stdin.read()
-    print(data)
+class Solve:
+    def __init__(self):
+        pass
 
 if __name__ == "__main__":
-    main()
+    Solve()
 EOL
     fi
     ;;
@@ -87,6 +82,7 @@ EOL
     if [ ! -f "$filename.java" ]; then
       cat > "$filename.java" <<EOL
 import java.util.*;
+
 public class $class_name {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
