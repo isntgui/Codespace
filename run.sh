@@ -43,15 +43,11 @@ lang="$2"
 [ -f "$filename.in" ] || touch "$filename.in"
 
 case "$lang" in
-  cpp)
+    cpp)
     if [ ! -f "$filename.cpp" ]; then
       cat > "$filename.cpp" <<EOL
 #include <bits/stdc++.h>
 using namespace std;
-
-#ifdef LOCAL
-    #include "debugging.h"
-#endif
 
 #define int int64_t
 
@@ -63,7 +59,7 @@ int32_t main() {
 }
 EOL
     fi
-    g++ -DLOCAL -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$filename.cpp" -o "$filename"
+    g++ -std=c++17 -DLOCAL -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$filename.cpp" -o "$filename"
     ;;
   py)
     if [ ! -f "$filename.py" ]; then
