@@ -59,7 +59,7 @@ int32_t main() {
 }
 EOL
     fi
-    g++ -std=c++17 -O2 -Wall -DLOCAL -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$filename.cpp" -o "$filename"
+    g++ -std=c++17 -O2 -DLOCAL -I /mnt/c/Users/souza/OneDrive/Documentos/includes "$filename.cpp" -o "$filename"
     ;;
   py)
     if [ ! -f "$filename.py" ]; then
