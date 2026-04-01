@@ -1,0 +1,13 @@
+{
+  "workbench.editor.empty.hint": "hidden",
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.fontSize": 14,
+    "editor.cursorBlinking": "expand",
+    "editor.cursorStyle": "line",
+    "editor.formatOnSave": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+}
