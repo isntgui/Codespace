@@ -1,4 +1,5 @@
 {
+  // Adicione essa parte no inicio do seu settings.json
   "workbench.editor.empty.hint": "hidden",
     "editor.fontFamily": "Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
