@@ -4,16 +4,31 @@
 		"prefix": "cpp",
 		"body":[
 			"#include <bits/stdc++.h>",
-			"using namespace std;",
-			"",
-			"#define int int64_t",
-			"",
-			"int32_t main() {"
-			"	ios::sync_with_stdio(false);",
-			"	cin.tie(nullptr);",
-			"",
-			"	;",
-			"}",
+			"using namespace std;\n",
+			"#define int long long\n",
+			"int32_t main() {",
+			"\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);",
+			"\t$0",
+			"}"
+		]
+	},
+	"template para Codeforces": {
+		"prefix": "cf",
+		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;\n",
+			"#define int long long\n",
+			"void solve() {",
+			"\t$0",
+			"}\n",
+			"int32_t main() {",
+			"\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);",
+			"\tint tt = 1;",
+			"\tcin >> tt;",
+			"\twhile (tt--)",
+			"\t\tsolve();",
+			"\treturn 0;",
+			"}"
 		]
 	}
 }
