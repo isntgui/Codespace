@@ -1,13 +1,9 @@
 Tutorial de como rodar o código em diferente casos:
 
 PowerShell:
-Com arquivo de debugging:
-cls; g++ -Do_0 -std=c++17 -O2 -Wall A.cpp -o exe; Get-Content in | ./exe  
-Sem arquivo de debugging:
+cls; g++ -std=c++17 -O2 -Wall A.cpp -o exe; cmd /c ".\exe.exe < A.in"
+ou
 cls; g++ -std=c++17 -O2 -Wall A.cpp -o exe; Get-Content in | ./exe
 
 Windows:
-Com arquivo de debugging:
-cls && g++ -Do_0 -std=c++17 -O2 -Wall A.cpp -o exe && exe < in
-Sem arquivo de debugging:
 cls && g++ -std=c++17 -O2 -Wall A.cpp -o exe && exe < in
