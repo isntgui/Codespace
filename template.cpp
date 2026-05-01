@@ -15,7 +15,7 @@ struct is_iterable : false_type {};
 template <typename T>
 struct is_iterable<
     T,
-    void_t<decltype(begin(declval<T>())), decltype(end(declval<T>()))>> : true_type {};
+    void_t<decltype(begin(declval<T>())), decltype(end(declval<T>()))> > : true_type {};
 
 template <>
 struct is_iterable<string> : false_type {};
@@ -24,13 +24,13 @@ template <typename T>
 struct is_special_container : false_type {};
 
 template <typename... Args>
-struct is_special_container<stack<Args...>> : true_type {};
+struct is_special_container<stack<Args...> > : true_type {};
 
 template <typename... Args>
-struct is_special_container<queue<Args...>> : true_type {};
+struct is_special_container<queue<Args...> > : true_type {};
 
 template <typename... Args>
-struct is_special_container<priority_queue<Args...>> : true_type {};
+struct is_special_container<priority_queue<Args...> > : true_type {};
 
 template <typename T>
 enable_if_t<is_iterable<T>::value && !is_special_container<T>::value, ostream&>
@@ -40,7 +40,8 @@ operator<<(ostream& out, const T& container) {
     while (it != end(container)) {
         out << *it;
         ++it;
-        if (it != end(container)) out << ", ";
+        if (it != end(container))
+            out << ", ";
     }
     return out << "]";
 }
